@@ -1,6 +1,5 @@
 FROM ubuntu:18.04
 
-
 LABEL MAINTAINER="Andres Godinez"
  
 RUN apt-get update \
