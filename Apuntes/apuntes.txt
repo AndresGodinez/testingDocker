@@ -1,0 +1,38 @@
+!iniciar contenedor nginx
+docker run --rm -d \
+--name nginx \
+-v $(pwd)/application:/var/www/html \
+-p 8080:80 \
+--link php:php \
+agodinez/nginx
+
+!iniciar contenedor php
+run --rm -d \
+--name php \
+-v $(pwd)/application:/var/www/html \
+--link redis:redis \
+--link mysql:mysql \
+agodinez/php73
+
+!iniciar contenedor redis
+docker run --rm --d \
+--name php \
+-v $(pwd)/application:/var/www/html \
+--link redis:redis \
+--link mysql:mysql
+
+
+!iniciar contenedor mysql
+docker run --rm -d \
+--name mysql \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_DATABASE=testing \
+-e MYSQL_USER=andres \
+-e MYSQL_PASSWORD=secret \
+mysql:5.7
+
+!contenedor alpine/redis 
+docker run --rm -d \
+--name redis \
+redis:alpine
+
