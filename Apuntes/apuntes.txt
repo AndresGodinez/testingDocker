@@ -36,3 +36,47 @@ docker run --rm -d \
 --name redis \
 redis:alpine
 
+
+cuando usamos --link en los contenedores
+lo que hace es modificar el archivo host
+de cada contenedor para intenetar hacer 
+una conexion con los demás servidores.
+
+Crear una red con docker
+dokcer network create "Nombre de red"
+docker network rm "Nombre de red"
+
+#crear contenedor de alpine con redis
+docker run --rm -d --name redis \
+--network aGoNetwork redis:alpine
+
+crear contenedor de Mysql
+
+docker run --rm \
+-d \
+--name mysql \
+--network aGoNetwork \
+-e MYSQL_ROOT_PASSWORD=root \
+-e MYSQL_DATABASE=styde \
+-e MYSQL_USER=styde \
+-e MYSQL_PASSWORD=secret \
+-p 33060:3306 \
+mysql:5.7
+
+# Crear contenedor de PHP
+docker run --rm \
+-d \
+--name php \
+-v $(pwd)/application:/var/www/html \
+--network aGoNetwork \
+agodinez/php73
+ 
+# Crear contenedor de Nginx
+docker run --rm \
+-d \
+--name nginx \
+-p 8080:80 \
+-v $(pwd)/application:/var/www/html \
+--network aGoNetwork \
+agodinez/nginx
+

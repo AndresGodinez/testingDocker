@@ -2,9 +2,9 @@
 echo "Hostname 'redis' can be found at ".gethostbyname('redis'). "\n";
 
 $hostname='mysql';
-$username='andres';
+$username='styde';
 $password='secret';
-$dbname="testing";
+$dbname="styde";
 
 try{
     $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password, 
